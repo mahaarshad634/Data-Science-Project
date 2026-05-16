@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Air Quality Health Predictor</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Card */
+.container {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Input Fields */
+.input-group {
+    margin: 10px 0;
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 5px rgba(79,172,254,0.5);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Result Box */
+.result {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: none;
+}
+
+.safe {
+    background: #d4edda;
+    color: #155724;
+}
+
+.danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🌍 Air Quality Health Predictor</h2>
+
+    <div class="input-group">
+        <label>AQI</label>
+        <input type="number" id="aqi" placeholder="Enter AQI">
+    </div>
+
+    <div class="input-group">
+        <label>PM2.5</label>
+        <input type="number" id="pm25" placeholder="Enter PM2.5">
+    </div>
+
+    <div class="input-group">
+        <label>NO2</label>
+        <input type="number" id="no2" placeholder="Enter NO2">
+    </div>
+
+    <button onclick="predict()">Predict Health Risk</button>
+
+    <div id="resultBox" class="result"></div>
+</div>
+
+<script>
+function predict() {
+    let aqi = parseFloat(document.getElementById("aqi").value);
+    let pm25 = parseFloat(document.getElementById("pm25").value);
+    let no2 = parseFloat(document.getElementById("no2").value);
+
+    let resultBox = document.getElementById("resultBox");
+    resultBox.style.display = "block";
+
+    if (aqi > 150 || pm25 > 120 || no2 > 50) {
+        resultBox.className = "result danger";
+        resultBox.innerHTML = "⚠️ High Risk: Breathing Issues Likely";
+    } else {
+        resultBox.className = "result safe";
+        resultBox.innerHTML = "✅ Low Risk: Safe Condition";
+    }
+}
+</script>
+
+</body>
+</html>
